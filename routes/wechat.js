@@ -5,7 +5,7 @@ var wechat = require('wechat');
 router.use(wechat('10000zhongqingdao', function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
-    
+
     if (message.FromUserName === 'diaosi') {
         // reply with text
         res.reply('hehe');
@@ -32,8 +32,8 @@ router.use(wechat('10000zhongqingdao', function (req, res, next) {
             {
                 title: 'Come to fetch me',
                 description: 'or you want to play in another way ?',
-                picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-                url: 'http://nodeapi.cloudfoundry.com/'
+                picurl: 'https://avatars2.githubusercontent.com/u/1942320',
+                url: 'http://121.42.40.161:4000/'
             }
         ]);
     }
