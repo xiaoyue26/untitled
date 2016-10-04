@@ -8,7 +8,7 @@ var config = {
 };
 router.use(express.query());
 
-router.use(wechat('10000zhongqingdao', function (req, res, next) {
+router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
     console.log(message.FromUserName);
