@@ -1,13 +1,16 @@
 var redis = require("redis");
 /*var client = redis.createClient();
 
-client.on("error", function (err) {
-    console.log("Error " + err);
+ client.on("error", function (err) {
+ console.log("Error " + err);
+ });
+
+ client.on("connect", runSample);*/
+runSample("input1", function (err, data) {
+    console.log(data);
 });
 
-client.on("connect", runSample);*/
-runSample("input1");
-function runSample(content) {
+function runSample(content, callback) {
     var client = redis.createClient();
     var attr = content.trim().split(/\s+/);
     if (attr.length === 1) {
@@ -16,11 +19,11 @@ function runSample(content) {
             client.quit();
             if (reply) {
                 console.log(reply.toString());
-                return reply.toString();
+                callback(null, reply.toString());
             }
             else {
                 console.log('unset');
-                return 'unset';
+                callback(null, 'unset');
             }
         });
     }
@@ -30,14 +33,14 @@ function runSample(content) {
             if (reply) {
                 console.log(reply.toString());
                 client.quit();
-                return reply.toString();
+                callback(null, reply.toString());
             }
             else {
                 client.set("string " + attr[0], attr[1], function (err, reply) {
                     console.log('set ' + attr[0] + ' ' + attr[1]);
                 });
                 client.quit();
-                return attr[1];
+                callback(null, attr[1]);
             }
 
 
@@ -47,12 +50,12 @@ function runSample(content) {
         client.set("string " + attr[0], attr[1], function (err, reply) {
             console.log('set ' + attr[0] + ' ' + attr[1]);
             client.quit();
-            return attr[1];
+            callback(null, attr[1]);
         });
     }
     else {
         client.quit();
-        return 'split 0';
+        callback(null, 'split 0');
     }
 
 }

@@ -15,9 +15,9 @@ router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
     console.log(message);
-    var value = queryRedis(message.Content);
-    console.log("reply:" + value);
-    res.reply(value);
+    queryRedis(message.Content,function (err,data) {
+        res.reply(data);
+    });
 
 
 }));
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
 
 module.exports = router;
 
-function queryRedis(content) {
+function queryRedis(content,callback) {
     var client = redis.createClient();
     var attr = content.trim().split(/\s+/);
     if (attr.length === 1) {
@@ -37,11 +37,11 @@ function queryRedis(content) {
             client.quit();
             if (reply) {
                 console.log(reply.toString());
-                return reply.toString();
+                callback(null, reply.toString());
             }
             else {
                 console.log('unset');
-                return 'unset';
+                callback(null, 'unset');
             }
         });
     }
@@ -51,14 +51,14 @@ function queryRedis(content) {
             if (reply) {
                 console.log(reply.toString());
                 client.quit();
-                return reply.toString();
+                callback(null, reply.toString());
             }
             else {
                 client.set("string " + attr[0], attr[1], function (err, reply) {
                     console.log('set ' + attr[0] + ' ' + attr[1]);
                 });
                 client.quit();
-                return attr[1];
+                callback(null, attr[1]);
             }
 
 
@@ -68,12 +68,12 @@ function queryRedis(content) {
         client.set("string " + attr[0], attr[1], function (err, reply) {
             console.log('set ' + attr[0] + ' ' + attr[1]);
             client.quit();
-            return attr[1];
+            callback(null, attr[1]);
         });
     }
     else {
         client.quit();
-        return 'split 0';
+        callback(null, 'split 0');
     }
 
 }
