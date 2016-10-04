@@ -6,7 +6,7 @@ var config = {
     appid: 'wx3d6d724f53e423da',
     encodingAESKey: 'XGLykdEhKMK0hSJMqz2otbV5KMbwU1LLNvMT3HL0oNX'
 };
-app.use(express.query());
+router.use(express.query());
 
 router.use(wechat('10000zhongqingdao', function (req, res, next) {
     // message is located in req.weixin
