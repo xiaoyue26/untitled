@@ -1,34 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
-var wechat = require('wechat');
 var redis = require("redis");
+/*var client = redis.createClient();
 
-var config = {
-    token: '10000zhongqingdao',
-    appid: 'wx3d6d724f53e423da',
-    encodingAESKey: 'XGLykdEhKMK0hSJMqz2otbV5KMbwU1LLNvMT3HL0oNX'
-};
-router.use(express.query());
-
-router.use(wechat(config, function (req, res, next) {
-    // message is located in req.weixin
-    var message = req.weixin;
-    console.log(message);
-    var value=queryRedis(message.Content);
-    res.reply(value);
-
-
-
-}));
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('into wechat');
+client.on("error", function (err) {
+    console.log("Error " + err);
 });
 
-module.exports = router;
-
-function queryRedis(content) {
+client.on("connect", runSample);*/
+runSample("input1");
+function runSample(content) {
     var client = redis.createClient();
     var attr = content.trim().split(/\s+/);
     if (attr.length === 1) {
@@ -77,3 +56,6 @@ function queryRedis(content) {
     }
 
 }
+
+
+//client.expire('string key', 0);
