@@ -13,17 +13,16 @@ router.use(express.query());
 router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
-    console.log(message);
+    for(var i in eval(req)){
+        console.log(i);
+    }
     fs.writeFile(path.join(__dirname, 'users.out'), message,function (err) {
         if (err) throw err;
-        console.log(message.data);
-        console.log(message.act);
-        console.log(message.cmd);
-        console.log(message.index);
-        console.log(message.key);
-        console.log(message.port);
-        console.log(message.seq);
-        console.log(message.FromUserName);
+        ob=eval(message);
+        for(var i in ob){
+            console.log(i);
+        }
+
     });
     if (message.FromUserName != 'diaosi') {
         // reply with text
