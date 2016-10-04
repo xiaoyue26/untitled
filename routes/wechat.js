@@ -5,7 +5,7 @@ var wechat = require('wechat');
 router.use(wechat('10000zhongqingdao', function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
-    res.reply('hehe');
+    
     if (message.FromUserName === 'diaosi') {
         // reply with text
         res.reply('hehe');
