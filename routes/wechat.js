@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var wechat = require('wechat');
 var fs = require('fs');
+var path = require('path');
 var config = {
     token: '10000zhongqingdao',
     appid: 'wx3d6d724f53e423da',
