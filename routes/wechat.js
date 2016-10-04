@@ -15,9 +15,9 @@ router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
     console.log(message);
-    var value=queryRedis(message.Content);
+    var value = queryRedis(message.Content);
+    console.log("reply:" + value);
     res.reply(value);
-
 
 
 }));
