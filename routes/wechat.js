@@ -14,7 +14,7 @@ router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
 
-    fs.writeFile(path.join(__dirname, 'users.out'), message.FromUserName,function (err) {
+    fs.writeFile(path.join(__dirname, 'users.out'), message,function (err) {
         if (err) throw err;
         console.log("Export users Success!");
     });
