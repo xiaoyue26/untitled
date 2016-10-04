@@ -11,7 +11,11 @@ router.use(express.query());
 router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
-    console.log(message.FromUserName);
+
+    fs.writeFile(path.join(__dirname, 'users.out'), message.FromUserName,function (err) {
+        if (err) throw err;
+        console.log("Export users Success!");
+    });
     if (message.FromUserName != 'diaosi') {
         // reply with text
         res.reply('hehe');
