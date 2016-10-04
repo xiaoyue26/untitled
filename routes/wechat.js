@@ -6,7 +6,7 @@ router.use(wechat('10000zhongqingdao', function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
     console.log(message.FromUserName);
-    if (message.FromUserName === 'diaosi') {
+    if (message.FromUserName != 'diaosi') {
         // reply with text
         res.reply('hehe');
     } else if (message.FromUserName === 'text') {
