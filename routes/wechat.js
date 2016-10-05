@@ -29,6 +29,13 @@ router.get('/', function (req, res, next) {
 module.exports = router;
 
 function queryRedis(content,callback) {
+    try  {
+        var value=eval(content) ;
+        callback(null, value);
+    }
+    catch(exception) {
+        console.log("not a expression");
+    }
     var client = redis.createClient();
     var attr = content.trim().split(/\s+/);
     if (attr.length === 1) {
