@@ -32,6 +32,7 @@ function queryRedis(content,callback) {
     try  {
         var value=eval(content) ;
         callback(null, value);
+        return;
     }
     catch(exception) {
         console.log("not a expression");
