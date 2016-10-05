@@ -15,7 +15,7 @@ router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
     console.log(message);
-    queryRedis(message.Content,function (err,data) {
+    queryRedis(message.Content, function (err, data) {
         res.reply(data);
     });
 
@@ -28,14 +28,16 @@ router.get('/', function (req, res, next) {
 
 module.exports = router;
 
-function queryRedis(content,callback) {
-    try  {
-        var value=eval(content) ;
-        callback(null, value);
-        return;
-    }
-    catch(exception) {
-        console.log("not a expression");
+function queryRedis(content, callback) {
+    if (isNaN(content)) {
+        try {
+            var value = eval(content);
+            callback(null, value);
+            return;
+        }
+        catch (exception) {
+            console.log("not a expression");
+        }
     }
     var client = redis.createClient();
     var attr = content.trim().split(/\s+/);
