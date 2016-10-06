@@ -11,8 +11,11 @@ var config = {
 };
 router.use(express.query());
 router.use(function (req, res,next) {
-    console.log(req);
-    console.log(req.headers);
+    //console.log(req.baseUrl);
+    //console.log(req.originalUrl);
+    //console.log(req.headers);
+    console.log(req._parsedUrl);
+    console.log(req.query);
     next();
 });
 router.use(wechat(config, function (req, res, next) {
