@@ -10,7 +10,10 @@ var config = {
     encodingAESKey: 'XGLykdEhKMK0hSJMqz2otbV5KMbwU1LLNvMT3HL0oNX'
 };
 router.use(express.query());
-
+router.use(function (req, res,next) {
+    console.log(req.headers);
+    next();
+});
 router.use(wechat(config, function (req, res, next) {
     // message is located in req.weixin
     var message = req.weixin;
