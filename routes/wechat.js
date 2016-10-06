@@ -11,6 +11,7 @@ var config = {
 };
 router.use(express.query());
 router.use(function (req, res,next) {
+    console.log(req);
     console.log(req.headers);
     next();
 });
