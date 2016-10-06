@@ -14,7 +14,7 @@ router.use(function (req, res,next) {
     //console.log(req.baseUrl);
     //console.log(req.originalUrl);
     //console.log(req.headers);
-    console.log(req._parsedUrl);
+    //console.log(req._parsedUrl);
     console.log(req.query);
     next();
 });
